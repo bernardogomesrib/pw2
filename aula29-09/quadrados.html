@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quadrados</title>
+    <style>
+        .tamanhoemargem{
+            height: 50px;
+            width: 50px;
+            margin: 5px;
+        }
+        .verde{
+            background-color: green;
+            
+        }
+        .vermelho{
+            background-color: yellow;
+        
+        }
+    </style>
+</head>
+<body>
+    <h1 id = "texto">Aula JS</h1>
+    <button id = "b1" onclick="clicar()" onmouseover="colocou_mouse()">BOTA VAI</button>
+    <div id="bx1" class="tamanhoemargem verde"></div>
+    <div id="bx2" class="tamanhoemargem vermelho"></div>
+    <script>
+        function clicar() {
+            console.log("usuario butou");
+        }
+        function colocou_mouse(){
+            console.log("quis botar")
+        }
+        let mudaverde = (id) => {
+        if (id =="bx1"){
+            document.getElementById(id).style.backgroundColor = "yellow"
+            document.getElementById(id).style.width ="250px"
+            document.getElementById(id).style.height ="250px"
+        }else{
+            document.getElementById(id).style.backgroundColor = "yellow"
+            document.getElementById(id).style.width ="50px"
+            document.getElementById(id).style.height ="50px"
+        }
+         
+            
+        }
+        let mudavermelho= (id) => {
+            if (id =="bx1"){
+                document.getElementById(id).style.backgroundColor = "green"
+                document.getElementById(id).style.width ="50px"
+                document.getElementById(id).style.height ="50px"
+            }else{
+                document.getElementById(id).style.backgroundColor = "green"
+                document.getElementById(id).style.width ="250px"
+                document.getElementById(id).style.height ="250px"
+            }
+            
+        }        
+        var b1 = document.getElementById('bx1');
+        b1.addEventListener('mouseover',mudaverde('bx1'));
+        b1.addEventListener('mouseout',mudavermelho('bx1'))
+        var b2 = document.getElementById('bx2')
+        b2.addEventListener('mouseover',mudavermelho('bx2'))
+        b2.addEventListener('mouseout',mudaverde('bx2'))
+        
+    </script>
+</body>
+</html>

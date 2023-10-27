@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>atividade 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #my_box {
+
+            min-width: 100px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tamanho {
+            width: 600px;
+            height: 100px;
+        }
+
+        .go {
+            background-color: green !important;
+        }
+
+        .stop {
+            background-color: red !important;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="my_box">
+        <h1 id="time">00:10</h1>
+        <div id="qnt"></div>
+
+    </div>
+    <button class="btn btn-primary" id="start">Start</button>
+    <button class="btn btn-secondary" id="stop">Stop</button>
+
+    <script>
+        let nIntervId;
+        var frases = ["The only way to do great work is to love what you do.", "The best way to predict the future is to create it.", "The only thing we have to fear is fear itself.", "The greatest glory in living lies not in never falling, but in rising every time we fall.", "The only true wisdom is in knowing you know nothing.", "The best and most beautiful things in the world cannot be seen or even touched ey must be felt with the heart.", "The only thing worse than being blind is having sight but no vision.", "The only limit to our realization of tomorrow will be our doubts of today.", "The only source of knowledge is experience.", "The only thing standing between you and your goal is the story you keep telling yourself that you can’t achieve it."];
+        let totalAcerto = 0;
+        function changetime() {
+            // check if an interval has already been set up
+            if (!nIntervId) {
+                nIntervId = setInterval(decreaseTime, 1000);
+                document.getElementById("my_box").innerHTML += "<div id = 'frases'></div> <br><TextArea class = 'form-control tamanho' id='inpt' type='text'></TextArea>";
+                document.getElementById("frases").innerText = frases[(Math.floor(Math.random() * 9))].toLocaleLowerCase();
+            }
+        }
+        function decreaseTime() {
+            const oElem = document.getElementById("time");
+            let time = oElem.textContent;
+            time = time.split(":")
+            time[1] -= 1;
+            if (time[1] == -1) {
+                time[1] = 59;
+                time[0] -= 1;
+                if (time[0] == -1) {
+                    time[0] = 0;
+                    time[1] = 0;
+                    document.getElementById("inpt").setAttribute("disabled", true);
+                    let fraseatual = document.getElementById("frases").innerText;
+                    let fraseDigitada = document.getElementById("inpt").value.toLocaleLowerCase();
+                    fraseatual = fraseatual.split(" ");
+                    fraseDigitada = fraseDigitada.split(" ");
+                    for (let index = 0; index < fraseatual.length; index++) {
+                        if (fraseDigitada.length >= index) {
+
+                            if (fraseDigitada[index] == fraseatual[index]) {
+                                totalAcerto++;
+                            }
+                        }
+                    }
+                    document.getElementById("qnt").innerText = "A quantidade de acertos foi: " + totalAcerto + " A quantidade de palavras na frase é:" + fraseatual.length;
+                    stopTextColor();
+                }
+            }
+            oElem.textContent = time[0] + ":" + time[1];
+
+        }
+
+        function stopTextColor() {
+            clearInterval(nIntervId);
+            // release our intervalID from the variable
+            nIntervId = null;
+        }
+
+        document.getElementById("start").addEventListener("click", changetime);
+        document.getElementById("stop").addEventListener("click", stopTextColor);
+    </script>
+</body>
+
+</html>

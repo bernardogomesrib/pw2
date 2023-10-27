@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        form {
+            display: flex;
+            width: 98vw;
+            height: 98vh;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+
+        input,
+        div {
+            width: 100%;
+            height: 5%;
+
+        }
+
+        div {
+            color: red;
+        }
+
+        input {
+            border: 1px solid black;
+        }
+    </style>
+    <form>
+        <input type="text" name="" id="nome" placeholder="Nome">
+        <div id="nom"></div>
+        <input type="email" name="" id="email" placeholder="email@provedor.com">
+        <div id="em"></div>
+        <input type="password" name="" id="senha" placeholder="Senha">
+        <div id="ps"></div>
+        <input type="button" value="Cadastrar" id="testar">
+    </form>
+    <script>
+        //jogando os inputs para variaveis
+        var nome = document.getElementById("nome");
+        var email = document.getElementById("email");
+        var senha = document.getElementById("senha");
+        let apareceMensagem = function () {
+            //teste se está vazio
+            if (nome.value == "") {
+                document.getElementById("nom").innerText = "o nome não pode ser vazio!"
+            } else {
+                document.getElementById("nom").innerText = ""
+            }
+            //teste de tamanho da senha
+            if (senha.value.length >= 8) {
+                document.getElementById("ps").innerText = "";
+            } else {
+                document.getElementById("ps").innerText = "a senha deve conter pelo  menos 8 caracteres";
+            }
+            //dividindo o email em 2 para checar a se é válido depois com base na quantidade de @s e se a segunda parte contem "."
+            let div = email.value.split("@");
+
+            if (div.length == 2 && div[1].includes(".")) {
+                document.getElementById("em").innerText = "";
+            } else {
+                document.getElementById("em").innerText = "formato de email inválido";
+            }
+        }
+        //adciona eventListener para o botão de enviar 
+        document.getElementById("testar").addEventListener("click", apareceMensagem);
+    </script>
+</body>
+
+</html>

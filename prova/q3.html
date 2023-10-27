@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        #mens {
+            width: 50vw;
+            height: 50vh;
+            text-align: center;
+            background-color: red;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+        }
+    </style>
+    <button id="btn" style="width: 50vw; height: 50vh;">aparece mensagem</button>
+    <div id="local"></div>
+    <script>
+        let nIntervId;
+        //função para aparecer a mensagem e fazer ela sumir depois de 3 segundos
+        function apareceMensagem() {
+            // check if an interval has already been set up
+            if (!nIntervId) {
+                nIntervId = setInterval(someMensagem, 3000);
+                document.getElementById("local").innerHTML = "<div id='mens'>o botão foi clicado</div>";
+
+            }
+        }
+        //função para parar de aparecer a mensagem e apagar ela
+        function someMensagem() {
+            clearInterval(nIntervId);//apagando a função
+            document.getElementById("local").innerHTML = "";
+            nIntervId = null;
+        }
+        //definindo event listener
+        document.getElementById("btn").addEventListener("click", apareceMensagem);
+    </script>
+
+</body>
+
+</html>

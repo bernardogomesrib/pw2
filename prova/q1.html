@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" name="" id="entrada">
+    <script>
+        //função para mudar a cor do texto do input
+        let muda = function () {
+            let rgb = "color: rgb(" + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")";//definindo um valor aleatório para a o style
+            document.getElementById("entrada").style = rgb;//jogando style a entrada
+            console.log(rgb);
+
+        }
+        //definindo o event listener
+        document.getElementById("entrada").addEventListener("keypress", muda)
+    </script>
+</body>
+
+</html>

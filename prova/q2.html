@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>número de clicks: <div id="num">0</div>
+    </h1>
+    <button id="btn">mais um!</button>
+    <script>
+        //função para somar um ao valor de um div
+        let soma = function () {
+            let tc = document.getElementById("num").textContent;
+            tc = parseInt(tc);//transformando em inteiro para poder somar
+            tc += 1;
+            document.getElementById("num").textContent = tc;
+        }
+        //jogando o event listener no botao
+        document.getElementById("btn").addEventListener("click", soma);
+    </script>
+
+</body>
+
+</html>

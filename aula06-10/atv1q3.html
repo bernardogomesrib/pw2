@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>atividade 1</title>
+    <style>
+        #my_box {
+
+            min-width: 700px;
+            min-height: 700px;
+        }
+
+        #img {
+            max-width: 700px;
+            max-height: 700px;
+            min-width: 700px;
+            min-height: 700px;
+
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="my_box">
+        <img id="img" src="sanic.png" alt="">
+    </div>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+    <script>
+        let nIntervId;
+
+        function changeImage() {
+            // check if an interval has already been set up
+            if (!nIntervId) {
+                nIntervId = setInterval(catchUrl, 1000);
+            }
+        }
+
+
+
+        function catchUrl() {
+
+            fetch('https://pokeapi.co/api/v2/pokemon/' + (Math.floor(Math.random() * 599) + 1))
+                .then(function (response) {
+                    //console.log(response)
+                    return response.json()
+                }).then(function (data) {
+                    //console.log(data)
+                    let imgsvg = data.sprites.other.dream_world.front_default
+                    //console.log(imgsvg)
+                    if (imgsvg == null) {
+                        //console.log(data.sprites.front_default)
+                        document.getElementById("img").src = data.sprites.front_default;
+                    } else {
+                        //console.log(imgsvg)
+                        document.getElementById("img").src = imgsvg;
+                    }
+
+                })
+        }
+
+
+
+        function stopChanage() {
+            clearInterval(nIntervId);
+            // release our intervalID from the variable
+            nIntervId = null;
+        }
+
+        document.getElementById("start").addEventListener("click", changeImage);
+        document.getElementById("stop").addEventListener("click", stopChanage);
+    </script>
+</body>
+
+</html>

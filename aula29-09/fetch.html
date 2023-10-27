@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quadrados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        .tamanhoemargem{
+            min-height: 50px;
+            min-width: 50px;
+            margin: 5px;
+        }
+        .verde{
+            background-color: green;
+            
+        }
+        .vermelho{
+            background-color: yellow;
+        
+        }
+    </style>
+</head>
+<body>
+    <h1 id = "texto">Aula JS</h1>
+    <input id ="pokemon" class = "inpt inpt-primary"type="text">
+    <button id = "b1" class ="btn btn-primary">BOTA VAI</button>
+    <div class="card" style="width: 18rem;">
+        <img id="imagem" src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 id = 'pokename' class="card-title">Card title</h5>
+         
+          
+        </div>
+        <ul id = "list" class="list-group list-group-flush">
+          
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    <div id="bx1" class="tamanhoemargem verde"></div>
+    <div id="bx2" class="tamanhoemargem vermelho"></div>
+    <script>
+        String.prototype.capitalize = function() {
+            return this.charAt(0).toUpperCase() + this.substr(1);
+        }
+       document.getElementById("b1").addEventListener('click',function(){
+        
+        fetch('https://pokeapi.co/api/v2/pokemon/'+document.getElementById('pokemon').value)
+       .then(function(response){
+        return response.json()
+       }).then(function(data){
+            console.log(data)
+            document.getElementById("pokename").innerText = data.name.capitalize()
+            let imgsvg = data.sprites.other.dream_world.front_default
+            if(imgsvg == null){
+                document.getElementById("imagem").src = data.sprites.front_default
+            }else{
+                document.getElementById("imagem").src = data.sprites.other.dream_world.front_default
+            }
+            
+            for (const item of data.abilities) {
+                console.log(item.ability.name)
+                document.getElementById("list").innerHTML += '<li class="list-group-item">'+item.ability.name+'</li>'
+            }
+       })
+       })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

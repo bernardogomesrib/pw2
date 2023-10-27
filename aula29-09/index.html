@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programação Web 2</title>
+</head>
+<body>
+    <h1 id = "texto">Aula JS</h1>
+    <button id = "b1" onclick="clicar()" onmouseover="colocou_mouse()">BOTA VAI</button>
+    <script>
+        function clicar() {
+            console.log("usuario butou");
+        }
+        function colocou_mouse(){
+            console.log("quis botar")
+        }
+        document.getElementById("texto").innerHTML = 'Novo nome'
+        let b1 = document.getElementById("b1")
+    </script>
+</body>
+</html>

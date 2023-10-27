@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>atividade 1</title>
+    <style>
+        #my_box {
+
+            width: 100px;
+            min-height: 100px;
+        }
+
+        .go {
+            background-color: green !important;
+        }
+
+        .stop {
+            background-color: red !important;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="my_box">
+        <div id="time">10:00</div>
+
+    </div>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+    <script>
+        let nIntervId;
+
+        function changetime() {
+            // check if an interval has already been set up
+            if (!nIntervId) {
+                nIntervId = setInterval(decreaseTime, 1000);
+                document.getElementById("my_box").innerHTML += " <input id='inpt' type='text'>";
+            }
+        }
+
+        function decreaseTime() {
+            const oElem = document.getElementById("time");
+            let time = oElem.textContent;
+            time = time.split(":")
+            time[1] -= 1;
+            if (time[1] == -1) {
+                time[1] = 59;
+                time[0] -= 1;
+                if (time[0] == -1) {
+                    time[0] = 0;
+                    time[1] = 0;
+                    document.getElementById("inpt").setAttribute("disabled", true);
+                }
+            }
+
+            oElem.textContent = time[0] + ":" + time[1];
+
+        }
+
+        function stopTextColor() {
+            clearInterval(nIntervId);
+            // release our intervalID from the variable
+            nIntervId = null;
+        }
+
+        document.getElementById("start").addEventListener("click", changetime);
+        document.getElementById("stop").addEventListener("click", stopTextColor);
+    </script>
+</body>
+
+</html>
